@@ -1,0 +1,78 @@
+https://react.dev/learn/describing-the-ui
+
+U git folder
+
+npx create-react-app my-app
+cd my-app
+npm start
+
+index.js kao osnova
+
+----------------
+
+npm restart //  restart server
+
+----------------
+
+npm i -D react-router-dom  // da ima rute
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
+ <BrowserRouter>
+    <Routes>
+        <Route index path="/" element={<Home />}>
+        <Route  path="/game" element={<Game />}>
+        <Route path="/registration" element={<Registration />}>
+    </Routes>
+</BrowserRouter>  // ubaciti router
+
+---------------------------
+
+import Home from './Home'; // pozove komponentu
+
+function Home() { 
+
+    return (<> </> )
+}
+
+export default Home; // exportuje  komponentu
+
+--------------------
+
+import { Outlet, Link } from "react-router-dom";
+<Link to="/game">Game</Link> // html link
+
+----------------
+
+import './App.css'; // import css
+
+function Move() // M mora Veliko slovo
+
+
+---------------
+
+Navigate
+
+import { useNavigate } from 'react-router-dom'
+const navigate = useNavigate()
+
+navigate("/game"); // const i navigate moraju  u funkciju unutar glavne default
+
+
+---------------
+
+import React, {useState, useEffect} from 'react'
+
+ useEffect(() => {
+        win()
+        console.log("effect");
+    }, [ring3]) // when ring3 is changed, execute win()
+
+
+-----------------
+
+auto refresh
+
+.env fajl
+FAST_REFRESH=false
+restart
