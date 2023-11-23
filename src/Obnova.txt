@@ -1,0 +1,118 @@
+flex-direction
+flex-wrap
+flex-flow
+justify-content
+align-items
+align-content
+
+order
+flex-grow
+flex-shrink
+flex-basis
+flex
+align-self
+
+var,let, const
+
+Variables defined with let cannot be Redeclared.
+must be Declared before use.
+have Block Scope.
+
+Map holds key-value pairs where the keys can be any datatype.
+remembers the original insertion order of the keys.
+
+JavaScript Set is a collection of unique values.
+Each value can only occur once in a Set.
+
+string
+number
+boolean
+object
+function
+
+
+Object
+Date
+Array
+String
+Number
+Boolean
+
+null
+undefined
+
+try/catch
+
+Strict mode makes it easier to write "secure" JavaScript.
+changes previously accepted "bad syntax" into real errors.
+
+this keyword refers to an object
+
+Arrow Function allow us to write shorter function syntax
+hello = () => {
+  return "Hello World!";
+}
+
+class ClassName {
+  constructor() { ... }
+}
+
+<script type="module">
+import message from "./message.js";
+
+JSON is a format for storing and transporting data.
+JSON is often used when data is sent from a server to a web page.
+XML is much more difficult to parse than JSON.
+JSON is parsed into a ready-to-use JavaScript object.
+
+built-in function JSON.parse() to convert the string into a JavaScript object
+JSON.stringify(obj);
+
+
+jQuery library contains the following features:
+
+HTML/DOM manipulation
+CSS manipulation
+HTML event methods
+Effects and animations
+AJAX
+
+$.get() method requests data from the server with an HTTP GET request.
+
+GET is used to request data from a specified resource.
+requests can be cached
+requests remain in the browser history
+requests can be bookmarked
+requests should never be used when dealing with sensitive data
+GET requests have length restrictions
+
+POST is used to send data to a server to create/update a resource.
+POST requests are never cached
+POST requests do not remain in the browser history
+POST requests cannot be bookmarked
+POST requests have no restrictions on data length
+
+React creates a VIRTUAL DOM in memory
+only changes what needs to be changed
+Router, menja stranice 
+
+Sass is a CSS pre-processor
+$variablename: value;
+Nested, font, text
+@import filename;
+The @mixin directive lets you create CSS code that is to be reused throughout the website.
+The @include directive is created to let you use (include) the mixin. Prihvata varijable.
+@extend .button-basic; element pokupi od extendovanog
+
+
+
+
+JSX(JavaScript Syntax Extension) - You can embed JavaScript objects inside the HTML elements.
+Virtual DOM - Whenever there is a modification in the web application, the whole virtual DOM is updated first and finds the difference between real DOM and Virtual DOM. Once it finds the difference, then DOM updates only the part that has changed recently and everything remains the same. 
+One-way Data Binding -  The data in react flows only in one direction i.e. the data is transferred from top to bottom i.e. from parent components to child components, keeps everything modular and fast
+React uses virtual DOM and updates only the modified parts. So , this makes the DOM to run faster. DOM executes in memory so we can create separate components
+JSX allows us to write conditional statements
+Components: React.js divides the web page into multiple components as it is component-based. Each component is a part of the UI design which has its own logic and design as shown in the below image. So the component logic which is written in JavaScript makes it easy and run faster and can be reusable.
+
+Docker is a tool that is used to automate the deployment of applications in lightweight containers so that applications can work efficiently in different environments.
+
