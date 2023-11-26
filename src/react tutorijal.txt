@@ -593,3 +593,127 @@ Ako zelimo da overajdujemo defaultno ponasanje, i da nateramo komponentu da se p
 <Chat key={email} /> , ako je ta vrednost nova, komponenta se pravi iz pocetka
 Ako ima puno izmena kroz event handler, funcionalnost izmena State-ova moze biti van komponente, takva funcija je reducer 
 import { useReducer } from 'react';
+Kontekst omogucava parent komponenti da postavi vrednost koju sve child komponente mogu da vide. Child komponente mogu da je izmene, i onda ce njene child k. da vide novu vrednost
+Reducer i kontekst se mogu ukombinovati da bi se smanjila slozensot koda
+
+////
+
+Reagovanje inputa i state-a
+
+Kako se deklarativni UI razlikuje od imperativnog. U Reactu se html ne menja direktno.
+
+Kako gledati UI deklarativno:
+
+- Identifikuj razlicite izglede neke komponente
+Napravi mockup, izgled svih mogucih stateova
+
+
+Odredi sta okida izmenu state-ova
+- Human i kompjuter input, okidaju izmenu
+
+Predstavi State
+- Sto manje stetova definisi
+
+Ukloni nepotrebne state varijable
+- State ne bi trebao biti paradoksalan (ako dva state ne mogu da budu true)
+- Ako je vrednost nekog state vec unutar drugog
+- Kada neki state ima vrednost suprotnoj drugom
+- Reducer moze da ukloni nemoguce statove
+
+
+Povezi event handlere sa stateom
+
+
+///////
+
+Struktura State-ova
+
+Ako se dva state-a cesto menjaju zajedno, onda mogu postati jedan state
+Izbegni kontradikcije u state-ovima
+Izbegni nepotreban state, ako props moze izracunati potrebno
+Izbegni duplikacije
+Izbegni duboko nestovan state
+
+
+const [position, setPosition] = useState({ x: 0, y: 0 });
+umesto
+const [x, setX] = useState(0);
+const [y, setY] = useState(0);
+
+
+const [status, setStatus] = useState('typing'); // 'typing' (initial), 'sending', and 'sent'
+umesto
+const [isSending, setIsSending] = useState(false);
+const [isSent, setIsSent] = useState(false);
+
+
+Ako state moze da se izracuna, ne bi trebalo staviti taj podatak u state
+const [firstName, setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
+const fullName = firstName + ' ' + lastName;
+
+
+Kad dobije prop od parenta, napravi sa const
+function Message({ messageColor }) {
+  const color = messageColor;
+}
+
+
+items = [{ id: 0, title: 'pretzels'}, ...]
+selectedItem = {id: 0, title: 'pretzels'}
+treba
+items = [{ id: 0, title: 'pretzels'}, ...]
+selectedId = 0
+Ne ponavlja se kontent u selectedItem
+
+Umesto nestovanog state, bolje imati flat, sa manje nivoa dubine
+Kada se elementi izbace iz state, memorija se oslobadja
+Upotrebiti Immer za koncizniji kod
+
+
+///////
+
+Deljenje State izmedju komponenti
+
+Da bi dve komponente imale isti state, on treba biti u najblizem parentu (lift their state up)
+Prosledjuje se data iz parenta
+
+Pozvana komponenta ima f-ju koju trigeruje child
+Parent prosledjuje event handler
+ <Panel
+  title="Etymology"
+  isActive={activeIndex === 1}
+  onShow={() => setActiveIndex(1)}
+>
+
+<button onClick={onShow}>
+
+Komponente mogu biti kontrolisane i nekontrolisane (imaju props, ili imaju svoj state)
+Single source of truth / State treba biti definisan i menjan u jednoj odabranoj komponenti
+
+
+/////
+
+Cuvanje i resetovanje state-a 
+
+Svaka komponenta ima izolovan state
+Ako se komponenta ne pozove/unisti, state nestaje
+Kada se komponenta sa istim nazivom pozove na istom mestu, ali kao novi tag, state ostaje isti
+ {isFancy ? (
+  <Counter isFancy={true} /> 
+) : (
+  <Counter isFancy={false} /> 
+)}
+
+Ali ako se wrapper promeni, komponenta se gubi
+ {isFancy ? (
+  <div>
+    <Counter isFancy={true} /> 
+  </div>
+) : (
+  <section>
+    <Counter isFancy={false} />
+  </section>
+)}
+
+Deklariši komponentu na top nivou, i ne nestuj njihovu definiciju
