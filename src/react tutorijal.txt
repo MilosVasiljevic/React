@@ -717,3 +717,127 @@ Ali ako se wrapper promeni, komponenta se gubi
 )}
 
 Deklariši komponentu na top nivou, i ne nestuj njihovu definiciju
+
+Kako resetovati komponentu:
+Napraviti je na drugom mestu
+Sa key atributom, ponovo ce da resetuje vrednost, jer stvara novu komponentu u slucaju da je key nov
+{isPlayerA ? (
+  <Counter key="Taylor" person="Taylor" />
+) : (
+  <Counter key="Sarah" person="Sarah" />
+)}
+
+Ako mu se promeni key vrednost, ucitava se opet
+<Chat key={to.id} contact={to} />
+
+/////
+
+Reducer - koristi se za komponente koje imaju dosta evetn handlera
+
+1. Umesto state, dispatch funkcija
+2. Napisi reducer funkciju
+3. Upotrebi reducer iz komponente
+
+Umesto
+function handleAddTask(text) {
+  setTasks([
+    ...tasks,
+    {
+      id: nextId++,
+      text: text,
+      done: false,
+    },
+  ]);
+}
+treba
+function handleAddTask(text) {
+  dispatch({
+     // "action" object:
+    type: 'added',
+    id: nextId++,
+    text: text,
+  });
+}
+
+Objekat koji se prosledjuje dispatch-u se zove Action
+Treba imati type: 'what_happened', opis sta se radi
+
+Reducer f-ja ima state i akciju, i vraca novi state
+function yourReducer(state, action) {
+  // return next state for React to set
+}
+
+Kada se promeni izgleda ovako:
+function tasksReducer(tasks, action) {
+  if (action.type === 'added') {
+    return [
+      ...tasks,
+      {
+        id: action.id,
+        text: action.text,
+        done: false,
+      },
+    ];
+  }
+  ......}
+Treba koristi switch, unutar {} i da se zavrsava sa return
+
+
+Reducer se moze deklarisati van komponente
+
+
+import { useReducer } from 'react';
+umesto useState
+const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+
+useReducer koristi argumente - reducer f-ju i inicijalni state
+Vraca stateful vrednost i dispatch f-ju
+
+Logika moze biti premestena u drugi fajl
+
+Reduceri moraju biti cisti, sa istim inputom vracaju isti output
+Svka akcija opisuje jednu interakciju, cak i ako menja vise elemenata
+
+
+Sa immerom
+case 'added': {
+  draft.push({
+    id: action.id,
+    text: action.text,
+    done: false,
+  });
+  break;
+}
+
+
+//////
+
+Context omogucava parent komponenti da prosledjuje vrednosti child komponentama, bez obzira koliko bile nestovane
+
+Napravi kontekst:
+import { createContext } from 'react';
+export const LevelContext = createContext(1); // 1 je defaultna vrednost
+
+Upotrebi kontekst:
+import { useContext } from 'react';
+
+Procitaj ga unutar komponente, umesto props-a
+const level = useContext(LevelContext);
+
+Donesi kontekst:
+
+wrappuj ga u levelContext.Provider
+<LevelContext.Provider value={level}>
+  {children}
+</LevelContext.Provider>
+
+Kako da autoinkrementuje nivoe
+ const level = useContext(LevelContext);
+ <LevelContext.Provider value={level + 1}>
+
+Kontekst se moze izvuci bez obzira koliko duboko
+
+Ne koristi context, ako neki child treba da koristi samo odredjene props
+Ekstraktuj komponente i prosledi JSX kao children
+
+Koristi context, za theme, trenutni account, router, ako je state definisan blizu vrha, cesto se koristi reducer sa contextom
