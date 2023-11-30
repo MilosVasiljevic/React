@@ -1,3 +1,40 @@
+Generalno 
+
+
+U git folder
+
+U nodejs folder otvoris terminal (preko cmd C:\Program Files\nodejs>)
+
+npx create-react-app my-app (my-app je ime aplikacije)
+cd my-app
+npm start
+
+obrisi web vitals
+
+index.js je osnova
+
+----------------
+
+npm restart //  restart server
+
+-----------------
+
+auto refresh
+
+.env fajl
+FAST_REFRESH=false
+restart
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+
+
+
+Kod 
+
+
 React apps are made out of components.
 React components are JavaScript functions that return markup
 
@@ -28,6 +65,10 @@ function AboutPage() {
     </>
   );
 }
+
+Fajl moze da vrati vrednost, ili vise njih, ne mora return html
+
+export const TasksContext = createContext(null);
 
 ///////
 
@@ -841,3 +882,12 @@ Ne koristi context, ako neki child treba da koristi samo odredjene props
 Ekstraktuj komponente i prosledi JSX kao children
 
 Koristi context, za theme, trenutni account, router, ako je state definisan blizu vrha, cesto se koristi reducer sa contextom
+
+
+/////
+
+Kombinovanje reducera i contexta
+
+Prosledjivanje f-ja kroz props moze biti komplikovano, zato je bolje context
+
+Napravi context, stavi state i dispatch u njega, upotrebi context bilo gde u DOM-u

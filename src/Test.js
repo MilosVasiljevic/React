@@ -1,42 +1,13 @@
-//import { useState, useEffect, createContext, useContext, useRef, useReducer } from "react";
-import { Outlet, Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import AddTask from './test/AddTask.js';
+import TaskList from './test/TaskList.js';
+import { TasksProvider } from './test/TasksContext.js';
 
-import { createContext } from 'react';
-import { useContext } from 'react';
-
-const kontekst = createContext(0);
-
-
-function DrugoUnutra() {
-    return (
-        <>
-        <p>Trece unutra</p>
-        <p> {useContext(kontekst)}</p>
-        </>
-    )
+export default function TaskApp() {
+  return ( // poziva f-ju tasks provider, sve unutar njega je children varijabla
+    <TasksProvider> 
+      <h1>Lista taskova</h1>
+      <AddTask />
+      <TaskList />
+    </TasksProvider>
+  );
 }
-
-function Unutra() {
-    return (
-        <>
-        <h2>Unutra</h2>
-        <p> {useContext(kontekst)}</p>
-         <DrugoUnutra/> 
-         
-        </>
-    );
-}
-
-export default function Test() {
-
-    return (
-        <>
-        <h1>Test</h1>
-        <p> {useContext(kontekst)+1}</p>
-        <Unutra/>
-        </>
-    );
-
-};
-
