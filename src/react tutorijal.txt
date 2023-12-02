@@ -891,3 +891,68 @@ Kombinovanje reducera i contexta
 Prosledjivanje f-ja kroz props moze biti komplikovano, zato je bolje context
 
 Napravi context, stavi state i dispatch u njega, upotrebi context bilo gde u DOM-u
+
+
+////////
+
+Komunikacija React-a sa spoljnim sistemima
+
+Ako hocemo da zapamtimo neku vrednost izmedju rendera, a da ne izazovemo render, koristimo ref
+
+import { useRef } from 'react';
+const ref = useRef(0);
+
+
+DOM se moze najbolje menjati sa ref
+
+const inputRef = useRef(null);
+inputRef.current.focus();
+<input ref={inputRef} />
+
+Efekat omogucava da se izvrsi neki kod nakon renderovanja
+Efekt moze da pocisti za sobom
+
+Efekat nije potreban da bi se menjao podatak za render
+Nije potreban da bi upravljao user eventima
+
+Efekat moze da pocne da sinhronizuje i da prestane
+
+Efekat se aktivira kada se promeni vrednost koja mu se prosledjuje
+
+Efekat Event nije reaktivan
+
+Nepotrebne dependency uzriokuju da se Efekat precesto okida
+
+
+////////////
+
+Ako zelimo da komponenta zapamti nov informaciju a da ne izazove render, koristimo Ref
+
+import { useRef } from 'react';
+
+Prosledi inicijalnu vrednost
+const ref = useRef(0);
+
+On vraca, ref.current
+{ 
+  current: 0 // The value you passed to useRef
+}
+
+Kada je podatak potreban za render, stavi ga u state. Kada je podatak potreban event handlerima i ne koristi se za render, stavi ga u Ref.
+
+Ako zelimo timeout da ne izaziva render
+const intervalRef = useRef(null);
+intervalRef.current = setInterval(() => {
+    setNow(Date.now());
+  }, 1000);
+
+
+Ref se koristi za drzanje timeout ID-a, 
+pravljenje i manipulaciju DOM elemenata, 
+drzanje objekata koji nisu potrebni za JSX
+
+Tretiraj ref kao escape hatch
+Ne citaj i ne pisi ref.current tokom renderovanja
+
+Najcesce se koristi da storuje DOM
+<div ref={myRef}>

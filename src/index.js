@@ -9,6 +9,7 @@ import Tic from './Tic';
 import Filter from './Filter';
 import Layout from './Layout';
 import Test from './Test';
+import Refs from './Refs';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -30,6 +31,7 @@ root.render(
           <Route path="/tic" element={<Tic />} />
           <Route path="/filter" element={<Filter />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/refs" element={<Refs />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
