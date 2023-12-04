@@ -105,7 +105,8 @@ if (isLoggedIn) {
 
 ///////////
 
-Lista varijablu u html
+Map Lista varijablu u html
+LI mora da ima key
 
 
 const products = [
@@ -241,6 +242,7 @@ OPIS UI
 library za renderovanje user interfejsa UI, mogu biti reusable, nestable komponente
 
 Glavna f-ja u fajlu iz koga se pozivaju ostale komponente, mora biti jedna default
+
 export default function Profile() {
 
 Ime f-je pocinje velikim slovom
@@ -334,7 +336,8 @@ Renderovanje Lista
 const listItems = people.map(person => <li>{person}</li>);
 return <ul>{listItems}</ul>;
 
-Filtriranje po atributu
+Filtriranje po atributu, koristi filter
+
 const chemists = people.filter(person =>
   person.profession === 'chemist'
 );
@@ -371,9 +374,9 @@ Napisi logiku unutar komponente ako je moguce
 UI kao drvo
 
 kako se komponente nestuju tako se i html nestuje
-Root app.js pozia childove, oni svoje itd
+Root app.js poziva childove, oni svoje itd
 
-ako imamo ovo, ucita se inspiration, posle njega copyright
+ako imamo ovo, ucita se inspiration, a copyright je {children}
  <InspirationGenerator>
   <Copyright year={2004} />
 </InspirationGenerator>
@@ -388,7 +391,7 @@ Komponente pamte svoje vrednosti u state
 Postupak - Trigerovanje, render, stavljanje u DOM
 
 Menjanje State-a izaziva render, ali ga ne menja
-Array moze biti state ali se ne treba menjati, treba napraviti novi
+Array moze biti state ali se ne treba menjati prosledjeni, treba napraviti novi u komponenti
 
 
 ///
@@ -498,6 +501,9 @@ artwork: { // but replace the artwork
 ////////
 
 Immer
+
+Koristan za menjanje objekata 
+
 npm install use-immer
 import { useState } from 'react' - Promeni u  - import { useImmer } from 'use-immer'
 
@@ -558,6 +564,7 @@ Menja niz tako sto napravi novi i u njemu promeni potrebne stavke
     };
   }
 });
+
 // Re-render with the new array
 setShapes(nextShapes);
 
