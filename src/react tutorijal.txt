@@ -1,3 +1,7 @@
+Selenium, Redux, React Native
+
+
+
 Generalno 
 
 
@@ -25,7 +29,30 @@ auto refresh
 FAST_REFRESH=false
 restart
 
+----------------
 
+Problem sa npm
+obrises node modules folder
+npm install
+
+
+-------------
+
+Blank page ili unable to connect
+
+
+
+
+----------------------
+
+
+Selenium
+
+npm install selenium-webdriver u Node folder
+
+In your project’s package.json, add requirement to dependencies:  "mocha": "^10.2.0"
+
+// refused to connect
 
 
 ////////////////////////////////////////////////////////////////////////

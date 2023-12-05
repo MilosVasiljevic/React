@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import { Outlet, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 
 function Game() {
   return (
