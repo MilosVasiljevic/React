@@ -21,10 +21,16 @@ const Layout = () => {
                         <Link to="/filter">Filter</Link>
                     </li>
                     <li>
+                        <Link to="/context">Context i Reducer</Link>
+                    </li>
+                    <li>
                         <Link to="/test">Test</Link>
                     </li>
                     <li>
                         <Link to="/refs">Refs</Link>
+                    </li>
+                    <li>
+                        <Link to="/testiranje">Testiranje</Link>
                     </li>
                 </ul>
             </nav>

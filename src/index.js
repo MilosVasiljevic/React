@@ -10,6 +10,9 @@ import Filter from './Filter';
 import Layout from './Layout';
 import Test from './Test';
 import Refs from './Refs';
+import Context from './Context';
+
+import Testiranje from './Testiranje';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -30,8 +33,10 @@ root.render(
           <Route path="/registration" element={<Registration />} />
           <Route path="/tic" element={<Tic />} />
           <Route path="/filter" element={<Filter />} />
+          <Route path="/context" element={<Context />} />
           <Route path="/test" element={<Test />} />
           <Route path="/refs" element={<Refs />} />
+          <Route path="/testiranje" element={<Testiranje />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

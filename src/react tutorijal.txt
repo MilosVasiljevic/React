@@ -1,6 +1,21 @@
-Selenium, Redux, React Native
+Testiranje
+
+Jest
+Selenium
+Testing library
 
 
+
+Redux, React Native
+
+CI/CD
+
+continuous integration and continuous deployment (CI/CD) pipeline is a series of steps that must be performed in order to deliver a new version of software
+
+REST API u React
+
+
+//////////
 
 Generalno 
 
@@ -53,6 +68,13 @@ npm install selenium-webdriver u Node folder
 In your project’s package.json, add requirement to dependencies:  "mocha": "^10.2.0"
 
 // refused to connect
+
+
+///////////////////
+
+Testing library
+
+npm install --save-dev @testing-library/react
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -631,6 +653,7 @@ Menjanje objekta unutar niza
 
 Kada se menja nestovan state, treba napraviti kopiju od mesta koji se menja do top levela
 
+Lose:
 const myNextList = [...myList];
 const artwork = myNextList.find(a => a.id === artworkId);
 artwork.seen = nextSeen; // Problem: mutates an existing item
@@ -658,9 +681,12 @@ updateMyList(draft => {
 
 ////
 
+
+NOVI DEO
+
 Upravljenje Statom
 
-Osibine elemenata (enabled npr) se menjaju kroz state, a ne kroz kod
+Osobine elemenata (enabled npr) se menjaju kroz state, a ne kroz kod
 State ne treba sadrzati nepotrebne ili duple/ponovljene podatke
 Ako dve komponente trebaju da dele State, onda on treba biti u parentu
 Kada se komponenta re-renderuje, React neke delove DOM-a menja a neke pravi od pocetka. 
@@ -669,7 +695,7 @@ Ako zelimo da overajdujemo defaultno ponasanje, i da nateramo komponentu da se p
 Ako ima puno izmena kroz event handler, funcionalnost izmena State-ova moze biti van komponente, takva funcija je reducer 
 import { useReducer } from 'react';
 Kontekst omogucava parent komponenti da postavi vrednost koju sve child komponente mogu da vide. Child komponente mogu da je izmene, i onda ce njene child k. da vide novu vrednost
-Reducer i kontekst se mogu ukombinovati da bi se smanjila slozensot koda
+Reducer i kontekst se mogu ukombinovati da bi se smanjila slozenost koda
 
 ////
 
@@ -807,7 +833,7 @@ Ako mu se promeni key vrednost, ucitava se opet
 
 /////
 
-Reducer - koristi se za komponente koje imaju dosta evetn handlera
+Reducer - koristi se za komponente koje imaju dosta event handlera
 
 1. Umesto state, dispatch funkcija
 2. Napisi reducer funkciju
@@ -865,13 +891,13 @@ import { useReducer } from 'react';
 umesto useState
 const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
 
-useReducer koristi argumente - reducer f-ju i inicijalni state
+useReducer koristi argumente - ime reducer f-je i inicijalni state
 Vraca stateful vrednost i dispatch f-ju
 
 Logika moze biti premestena u drugi fajl
 
 Reduceri moraju biti cisti, sa istim inputom vracaju isti output
-Svka akcija opisuje jednu interakciju, cak i ako menja vise elemenata
+Svaka akcija opisuje jednu interakciju, cak i ako menja vise elemenata
 
 
 Sa immerom
