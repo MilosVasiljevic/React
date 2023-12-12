@@ -1,34 +1,38 @@
 
 import './App.css';
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
+import { createContext ,  useContext } from 'react';
 
-
+import  {reducerFunkcija} from './Context2';
 
 const inicijalnaVrednost = ["1","2"];
 
 
+const Vrednost = createContext("Kontekst");
 
-function reducerFunkcija (tasks, action) {
+function Kontekst() {
 
-    console.log(tasks.length, action);
+    const prosledjenaVrednost = useContext(Vrednost);
 
-    const duzina = tasks.length;
-
-    switch (action.type) {
-
-        case 'add': {
-            return [...tasks, duzina + 1];
-        }
-
-        case 'remove': {
-            tasks.pop();
-            return [...tasks];
-        }
-
-    }
-
+    return (
+        <p>
+            {prosledjenaVrednost}
+        </p>
+    )
 }
 
+
+function Kontekst2() {
+
+    const [user, setUser ] = useState("Kontekst 2");
+
+    return (
+        <Vrednost.Provider value={user}>
+            {user}
+        </Vrednost.Provider>
+    );
+
+}
 
 
 
@@ -37,29 +41,45 @@ export default function Context() {
 
     const [novaVrednost, dispatch] = useReducer( reducerFunkcija, inicijalnaVrednost);
 
+    function MalaKomponenta() {
+
+        return (
+            <div>
+                <p>Reducer</p>
+                <p>{novaVrednost}</p>
+    
+                <button onClick={() => {
+                    dispatch({
+                        type: 'add'
+                    });
+                }}>
+                Ubaci novu vrednost
+                </button>
+    
+                <button onClick={() => {
+                    dispatch({
+                        type: 'remove'
+                    });
+                }}>
+                Skloni zadnju vrednost
+                </button>
+    
+            </div>
+        );
+    
+    }
+   
+
     return (
-        <div>
-            <p>Reducer</p>
-            <p>{novaVrednost}</p>
-
-            <button onClick={() => {
-                dispatch({
-                    type: 'add'
-                });
-            }}>
-            Ubaci novu vrednost
-            </button>
-
-            <button onClick={() => {
-                dispatch({
-                    type: 'remove'
-                });
-            }}>
-            Skloni zadnju vrednost
-            </button>
-
-        </div>
+        <>
+            <MalaKomponenta></MalaKomponenta>
+            <Kontekst></Kontekst>
+            <Kontekst2></Kontekst2>
+        </>
+        
     );
+
+    
 }
 
 

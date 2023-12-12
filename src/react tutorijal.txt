@@ -14,13 +14,17 @@ continuous integration and continuous deployment (CI/CD) pipeline is a series of
 
 REST API u React
 
+Next.js
 
 //////////
 
-Generalno 
 
 
-U git folder
+
+GENERALNO
+
+
+
 
 U nodejs folder otvoris terminal (preko cmd C:\Program Files\nodejs>)
 
@@ -81,7 +85,7 @@ npm install --save-dev @testing-library/react
 
 
 
-Kod 
+KOD
 
 
 React apps are made out of components.
@@ -1016,3 +1020,158 @@ Ne citaj i ne pisi ref.current tokom renderovanja
 
 Najcesce se koristi da storuje DOM
 <div ref={myRef}>
+
+/////////
+
+Manipulacija DOM-a
+
+Deklarisi unutar komponente i prosledi atribut elementu
+const myRef = useRef(null);
+
+<div ref={myRef}>
+
+Sa njime moze da se izvrsi
+myRef.current.scrollIntoView(); ili  inputRef.current.focus();
+
+
+Lista ref-a sa ref callback 
+
+<li
+  key={cat.id}
+  ref={node => {
+    const map = getMap();
+    if (node) {
+      // Add to the Map
+      map.set(cat.id, node);
+    } else {
+      // Remove from the Map
+      map.delete(cat.id);
+    }
+  }}
+>
+
+
+Ne moze da postavi ref na drugu komponenetu, cak iako je child
+
+import { forwardRef, useRef } from 'react';
+
+Zove komponentu sa ubacenim ref-om
+<MyInput ref={inputRef} />
+
+Spoljna komponenta prihvata ref
+const MyInput = forwardRef((props, ref) => {
+  return <input {...props} ref={ref} />;
+});
+
+Uglavnom jednostavni elementi imaju node, input, button, ne forme ili sekcije
+
+
+seImperativeHandle ogranicava sta moze da se prosledi komponenti
+import {
+  forwardRef, 
+  useRef, 
+  useImperativeHandle
+} from 'react';
+
+const MyInput = forwardRef((props, ref) => {
+  const realInputRef = useRef(null);
+  useImperativeHandle(ref, () => ({
+    // Only expose focus and nothing else
+    focus() {
+      realInputRef.current.focus();
+    },
+  }));
+  return <input {...props} ref={realInputRef} />;
+});
+
+
+
+Tokom rendera, zovu se komponente da bi se videlo sta ce biti na ekranu
+Tokom komita, menja se DOM
+Ne uzimati ref tokom renderovanja, zato se stvara sa null
+
+
+Menja DOM cim se izvrsi kod unutar flashSync, inace ref ne trigeruje render
+
+import { flushSync } from 'react-dom';
+
+flushSync(() => {
+  setTodos([ ...todos, newTodo]);
+});
+
+Ref se koristi za input focus, scroll position, zvanje browser API-ja
+Izbegavaj menjanje DOM noda koje odrzava React
+
+
+///////
+
+Efekat
+
+
+Vrste logike - Rendering kod se pise na vrhu, event handler kod se desava nakon eventa
+
+Efekat je event koji je izazivan renderovanjem, desava se nakon komita kada se ekran izmeni. Koristi se za API, third party 
+
+import { useEffect } from 'react';
+
+Staviti u top level, pozvace se posle rendera
+ useEffect(() => {
+    // Code here will run after *every* render
+  });
+
+
+Primer - dodeli video elementu play nakon rendera
+
+const ref = useRef(null);
+
+  useEffect(() => {
+  if (isPlaying) {
+    ref.current.play();
+  } else {
+    ref.current.pause();
+  }
+});
+
+
+Izaziva infinte loop
+
+const [count, setCount] = useState(0);
+useEffect(() => {
+  setCount(count + 1);
+});
+
+
+Ubaci dependency na kraju, kao niz, i nece da izvrsi render osim ako je vrednost promenjena
+Moze da ima i vise dependency, dovoljno je da jedna bude nova
+
+useEffect(() => {
+  if (isPlaying) { // It's used here...
+    // ...
+  } else {
+    // ...
+  }
+}, [isPlaying]);
+
+
+Uradi samo prvi put
+useEffect(() => {
+  // This runs only on mount (when the component appears)
+}, []);
+
+
+Clean-up funkcija
+Poziva se svaki put pre nego sto se effekt ponovo pozove, kao i kada se komponenta ukloni
+
+useEffect(() => {
+  const connection = createConnection();
+  connection.connect();
+  return () => {    // clen-up
+    connection.disconnect();
+  };
+}, []);
+
+
+Ceo app u strick mode
+ <StrictMode>
+    <App />
+  </StrictMode>
