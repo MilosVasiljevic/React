@@ -11,6 +11,7 @@ import Layout from './Layout';
 import Test from './Test';
 import Refs from './Refs';
 import Context from './Context';
+import Users from './Users';
 
 import Testiranje from './Testiranje';
 
@@ -22,26 +23,34 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <div>
-    <h1>Test website</h1>
-    {/* <Link to="/game">Game</Link> */}
+    <div class="cont">
 
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home color="red" />} />
-          <Route path="/game" element={<Game />} />
-          <Route path="/registration" element={<Registration />} />
-          <Route path="/tic" element={<Tic />} />
-          <Route path="/filter" element={<Filter />} />
-          <Route path="/context" element={<Context />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/refs" element={<Refs />} />
-          <Route path="/testiranje" element={<Testiranje />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+   
+      <h1>Test website</h1>
+      {/* <Link to="/game">Game</Link> */}
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home color="red" />} />
+            <Route path="/game" element={<Game />} />
+            <Route path="/registration" element={<Registration />} />
+            <Route path="/tic" element={<Tic />} />
+            <Route path="/filter" element={<Filter />} />
+            <Route path="/context" element={<Context />} />
+            <Route path="/test" element={<Test />} />
+            <Route path="/refs" element={<Refs />} />
+            <Route path="/testiranje" element={<Testiranje />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="*" element={<NoPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+    </div>
+
     <footer>kraj@</footer>
+
   </div>
 
 

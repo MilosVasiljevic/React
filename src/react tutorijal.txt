@@ -16,6 +16,8 @@ REST API u React
 
 Next.js
 
+https://jsonplaceholder.typicode.com/
+
 //////////
 
 
